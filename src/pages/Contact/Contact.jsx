@@ -48,7 +48,11 @@ const Contact = () => {
             <div>
               <h4>Social / Archive</h4>
               <p className={styles.socialLinks}>
-                <a href="https://github.com/jeonnni" target="_blank">
+                <a
+                  href="https://github.com/jeonnni"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <strong>Main Github</strong> (Present)
                 </a>
                 <br />
@@ -56,6 +60,7 @@ const Contact = () => {
                   href="https://github.com/ol7mi"
                   target="_blank"
                   className={styles.oldLink}
+                  rel="noopener noreferrer"
                 >
                   <strong>Project Archive</strong> (2022-2024)
                 </a>
