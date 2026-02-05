@@ -13,15 +13,15 @@ const About = () => {
       id: 1,
       title: "Frontend & SERVICE FLOW",
       description:
-        "HTML, CSS, JavaScript를 기반으로 웹 표준과 접근성을 고려한 퍼블리싱과 React를 활용한 사용자 중심 UI 구현이 가능합니다. Java · Spring 기반 풀스택 과정을 수료하여 백엔드 흐름과 API 구조를 이해하고 있으며, 개발자 간 협업을 고려한 프론트엔드 개발을 지향합니다.",
-      tags: ["HTML5", "CSS3", "jQuery", "JavaScript (ES6+)", "React"],
+        "HTML, CSS, JavaScript 기반으로 웹 표준과 접근성을 고려한 퍼블리싱을 수행했으며, React를 활용해 컴포넌트 구조 설계와 UI 개발을 진행했습니다. Spring Boot 기반 REST API 연동 프로젝트를 통해 프론트엔드와 백엔드 간 데이터 흐름을 이해하고 협업 구조를 고려한 개발을 해왔습니다.",
+      tags: ["HTML5", "CSS3", "JavaScript (ES6+)", "React"],
     },
     // 협업 및 디자인
     {
       id: 2,
       title: "Design & Tools",
       description:
-        "Figma, Adobe XD를 활용해 디자인 시안을 이해하고 UI로 구현할 수 있습니다. GitHub와 Jira를 통해 작업 이력 관리와 협업 경험이 있으며, 팀 프로젝트 환경에 빠르게 적응할 수 있습니다.",
+        "Figma, Adobe XD 기반 디자인 시안을 해석하여 화면에 구현했으며, GitHub와 Jira를 활용해 이슈 관리 및 협업을 진행했습니다.",
       tags: ["Figma", "Adobe XD", "GitHub", "Jira"],
     },
   ];
@@ -42,18 +42,18 @@ const About = () => {
             <h1 className={styles.name}>JEON EUNMI</h1>
             <div className={styles.line}></div>
             <p className={styles.job}>
-              Creative
+              Frontend
               <span className={styles.wordBox}>
                 <strong className={styles.word}>Developer</strong>
-                <strong className={styles.word}>Fast Learner</strong>
-                <strong className={styles.word}>Publisher</strong>
+                <strong className={styles.word}>React</strong>
+                <strong className={styles.word}>UI / UX</strong>
               </span>
             </p>
             <button
               className={styles.goBtn}
               onClick={() => navigate("/projects")}
             >
-              Go Project
+              View Projects
             </button>
           </div>
         </SwiperSlide>
@@ -67,9 +67,7 @@ const About = () => {
               {skillInfo.map((item) => (
                 <div className={styles.infoGroup} key={item.id}>
                   <h3 className={styles.skillTitle}>{item.title}</h3>
-                  <p
-                    className={`text-kr ${styles.description}`}
-                  >
+                  <p className={`text-kr ${styles.description}`}>
                     {item.description}
                   </p>
                   <div className={styles.tags}>

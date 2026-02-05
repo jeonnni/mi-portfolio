@@ -12,14 +12,11 @@ return (
     <div className={styles.content}>
       <h1 className={styles.title}>SKILLS</h1>
 
-      <p
-        className={`text-kr ${styles.description}`}
-      >
-        프론트엔드 개발을 중심으로 UI 구조 설계와 사용자 경험을 고려한 웹 서비스
-        구현에 집중하고 있습니다. <br />
-        React 기반 컴포넌트 설계와 상태 관리, 비동기 데이터 처리 경험을 보유하고
-        있으며, <br />
-        Java/Spring 기반 백엔드 구조에 대한 이해를 바탕으로 API 연동과 데이터
+      <p className={`text-kr ${styles.description}`}>
+        React 기반 컴포넌트 구조 설계와 상태 관리, <br />
+        API 연동을 포함한 프론트엔드 UI 개발을 수행해 왔습니다.
+        <br />
+        Spring 기반 백엔드 구조 이해를 바탕으로 프론트엔드–백엔드 간 데이터
         흐름을 고려한 개발이 가능합니다.
       </p>
 
