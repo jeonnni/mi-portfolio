@@ -1,5 +1,5 @@
 # 💻 MI Portfolio
-포트폴리오 웹사이트입니다.
+React 기반으로 제작한 프론트엔드 포트폴리오 웹사이트입니다.
 직접 설계한 디자인 가이드를 바탕으로 반응형 UI와 다크모드, 커스텀 인터랙션을 구현했습니다.
 
 🔗 Live Demo 보러가기
@@ -30,22 +30,27 @@ https://mi-portfolio-kappa-seven.vercel.app/
 ### 🎨 UI & Interaction
 
 **Custom Cursor**
+
 requestAnimationFrame과 선형 보간법(LERP)을 활용하여 꼬리를 물며 따라오는 부드러운 마우스 인터랙션을 구현했습니다.
 
 **Responsive Design**
+
 PC / Tablet / Mobile 환경을 고려한 반응형 레이아웃을 구현했습니다.
 
 **Dark Mode**
+
 LocalStorage와 CSS Variables를 활용해  
 테마 설정이 유지되는 구조로 설계했습니다.
 
 ### 🎞 프로젝트 전시 및 상세 조회
 
 **Project Slider**
+
 Swiper 라이브러리를 활용해 프로젝트 이미지를  
 직관적으로 탐색할 수 있도록 구성했습니다.
 
 **Project Detail Modal**  
+
 SweetAlert2 기반 커스텀 모달을 통해  
 기술 스택, 역할, 기간, 링크 등을 조건부 렌더링으로 제공했습니다.
 
