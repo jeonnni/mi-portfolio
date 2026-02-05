@@ -29,7 +29,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <Router basename="/mi-portfolio">
+    <Router basename="/">
       <div className="container">
         <Cursor />
         <Header />
