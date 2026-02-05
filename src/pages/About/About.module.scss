@@ -1,0 +1,245 @@
+
+@mixin flex-column($gap: 0) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor:default;
+    // 슬라이드
+    .mySwiper {
+      .slide {
+          padding-bottom: 50px;
+          .content {
+            padding: 5% 0;
+            @include flex-column(15px);
+            text-transform: uppercase;
+              
+              .name {
+                  font-size: var(--font-xxxl); 
+                  font-weight: 900;
+                  color: var(--color-text-main);
+                  margin: 0;
+                  letter-spacing: -1px; 
+              }
+              
+              .line {
+                width: 190px;
+                height: 15px;
+                color: var(--color-text-main);
+              }
+              
+              // 첫 번째 섹션
+              .job {
+                font-size: var(--font-xl);
+                color: var(--color-text-main);
+                margin: 10px 0 25px 0;
+
+                .wordBox {
+                  display: inline-block; 
+                  vertical-align: middle; 
+                  height: 56px;          
+                  overflow: hidden;     
+                }
+                
+                .word {
+                  display: block;        
+                  height: 56px;          
+                  line-height: 56px;     
+                  font-weight: 800;
+                  color: var(--color-text-sub);
+                  margin: 0;             
+                  animation: slideWords 9s infinite ease-in-out;
+                }
+                
+                @keyframes slideWords {
+                  0%, 25% { transform: translateY(0); }
+                  33%, 58% { transform: translateY(-56px); }  
+                  66%, 91% { transform: translateY(-112px); } /* 56 * 2 */
+                  100% { transform: translateY(0); }
+                }
+              }
+              
+              // 첫 번째 섹션 버튼
+              .goBtn {
+                width: fit-content;
+                padding: 15px 40px;
+                background-color: var(--color-text-sub);
+                color: var(--color-text);
+                border: none;
+                font-size: var(--font-lg);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-radius: var(--border-radius);
+                &:hover {
+                  opacity:0.9;
+                  color: var(--white-soft);
+                  transform: translateY(-5px);
+                }
+              }
+
+              // 두 번째 섹션
+              .doubleCard {
+                width: 100%;
+                display: flex;
+                gap: 80px; 
+                margin-top: 10px;
+
+                .infoGroup {
+                  flex: 1;
+                  @include flex-column(20px);
+
+                  // 부제목
+                  .skillTitle {
+                    // flex: 1;
+                    font-size: var(--font-xl);
+                    color: var(--color-text-main);
+                    font-weight: 800;
+                    margin: 0;
+                  }
+                  
+                  // 설명
+                  .description {
+                    font-size: var(--font-md);
+                    color: var(--color-text-inner);
+                    line-height: var(--line-height);
+                    text-transform: none; 
+                    margin: 0;
+                  }
+                  
+                  // 태그
+                  .tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+
+                    span {
+                      font-size: var(--font-sm);
+                      padding: 7px 13px;
+                      background: var(--primary-color);
+                      color: var(--white-mute);
+                      border-radius: var(--border-radius);
+                      font-weight: 500;
+                    }
+                  }
+                }
+              }
+          }
+      }
+    }
+}
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px 20px 20px;
+    .mySwiper{
+      .slide{
+        .content{
+          .name{
+            font-size: var(--font-xxl); 
+          }
+          .job{
+            font-size: var(--font-lg);
+          }
+          .goBtn{
+            font-size: var(--font-md);
+          }
+          .doubleCard{
+            .infoGroup{
+              .skillTitle {
+                font-size: var(--font-lg);
+                flex: none;
+              }
+              .description {
+                font-size: var(--font-base);
+              }
+              .tags {
+                span {
+                  font-size: var(--font-xs);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* 모바일 (768px 이하) */
+@media (max-width: 768px) {
+  .container {
+    .mySwiper {
+      .slide {
+        .content {
+          .name {
+            font-size: var(--font-sub-xl); 
+          }
+          .line {
+            width: 100px; 
+            height: 10px;
+          }
+          .job {
+            font-size: var(--font-base);
+            margin: 5px 0 15px 0;
+            
+            .wordBox { height: 30px;} 
+            .word { 
+              height: 30px;
+              line-height: 30px;
+              animation: slideWordsMobile 9s infinite ease-in-out;
+            }
+            /* 모바일 전용 (높이 30px) */
+            @keyframes slideWordsMobile {
+              0%, 25% { transform: translateY(0); }
+              33%, 58% { transform: translateY(-30px); }  
+              66%, 91% { transform: translateY(-60px); } /* 30 * 2 */
+              100% { transform: translateY(0); }
+            }
+          }
+          .goBtn {
+            width: 100%;
+            text-align: center;
+            padding: 12px 0;
+            font-size: var(--font-base);
+          }
+          .doubleCard {
+            flex-direction: column; 
+            gap: 40px; 
+            margin-top: 20px;
+  
+            .infoGroup {
+              gap: 12px; 
+  
+              .skillTitle {
+                font-size: var(--font-base);
+                flex: none; 
+              }
+  
+              .description {
+                font-size: var(--font-sm);
+                line-height: 1.5;
+                word-break: keep-all; 
+              }
+  
+              .tags {
+                gap: 6px;
+                span {
+                  font-size: var(--font-xs); 
+                  padding: 5px 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

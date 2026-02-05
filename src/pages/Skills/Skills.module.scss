@@ -1,0 +1,165 @@
+$transition: all 0.25s ease;
+
+.skillsWrapper {
+    flex: 1;
+    cursor: default;
+    .content {
+        /* 제목 */
+        .title {
+            text-align: center;
+            font-size: var(--font-xl);
+            font-weight: 900;
+            margin: 50px 0 10px 0;
+        }
+        /* 부제목 */
+        .description {
+            text-align: center;
+            font-size: var(--font-md);
+            color: var(--color-text-inner);
+            line-height: var(--line-height);
+            margin-bottom: 50px;
+        }
+        /* 스킬 */
+        .skillGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열로 배치 */
+            gap: 40px;
+
+            /* 스킬 상자 */
+            .skillBox {
+                // border-top: 2px solid var(--black); 
+                // padding-top: 50px;
+                background-color: var(--gray-bg-light);
+                border-radius: var(--border-radius);
+                padding: 35px 15px;
+                box-shadow: var(--shadow-sm);
+
+                /* 각 섹션 제목 */
+                .label {
+                    display: block;
+                    font-size: var(--font-sm);
+                    font-weight: 900;
+                    color: var(--gray-medium);
+                    margin-bottom: 30px;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+
+                /* 각 섹션 내용 */
+                .tagList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 30px 20px;
+                    align-items: center;
+
+                    .skillCard {
+                        position: relative;
+                        width: 60px;
+                        height: 60px;
+                        cursor: pointer;
+
+                        .img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: var(--border-radius);
+                            box-shadow: var(--shadow-md);
+                            transition: $transition;
+                            padding: 5px;
+                        }
+                        &:hover {
+                            .img {
+                                transform: scale(1.1)
+                            }
+                        }
+                        /* 처음엔 숨김 */
+                        .skillName {
+                            z-index: 10;
+                            position: absolute;
+                            top: 110%; 
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: var(--font-xs);
+                            letter-spacing: 1px;
+                            font-weight: 600;
+                            color: var(--gray-dark);
+                            opacity: 0;
+                            transition: $transition;
+                            white-space: nowrap;
+                            pointer-events: none; 
+                        }
+    
+                        /* hover 시 나타남 */
+                        &:hover {
+                            .skillName {
+                                opacity: 1;
+                                top: 120%;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+    .skillsWrapper {
+        padding: 0 20px 20px 20px;
+        .skillGrid {
+            gap: 20px;
+        }
+    }
+}
+/* 모바일 (768px 이하) */
+@media (max-width: 768px) {
+    .skillsWrapper {
+        .content {
+            .title{
+                margin: 10px 0;
+                font-size: var(--font-sub-xl);
+            }
+            .description{font-size: var(--font-base);}
+            .skillGrid {
+                /* 1열로 변경 */
+                grid-template-columns: 1fr; 
+                gap: 25px;
+                .skillBox {
+                    padding: 25px 20px;
+                    .label {
+                        margin-bottom: 20px; 
+                    }
+                    .tagList {
+                        gap: 30px 18px; 
+                        .skillCard {
+                            width: 50px;
+                            height: 50px;
+                            .img {
+                                transform: scale(1)
+                            }   
+                            &:hover {
+                                .img {
+                                transform: scale(1)
+                                }
+                            }
+                            .skillName {
+                                opacity: 1; 
+                                top: 110%;
+                                font-size: var(--font-xs);
+                            }
+                            &:hover {
+                                .skillName {
+                                    opacity: 1;
+                                    top: 110%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

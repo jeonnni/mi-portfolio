@@ -1,0 +1,86 @@
+.container {
+  margin: 0 auto;
+  width: fit-content; // 내용물 만큼만 너비 차지
+  padding: 8px 16px;
+  border-radius: 100px; 
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  
+  font-size: var(--font-md);
+  font-weight: bold;
+  
+  background: rgba(200, 199, 199, 0.361); 
+  backdrop-filter: blur(25px) saturate(180%); 
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0);
+  box-shadow: var(--shadow-sm);
+
+  .link, .active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 25px;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .link {   
+    color: var(--gray-medium);
+    &:hover {
+        color: var(--black-light);
+    }
+  }
+  
+  .active {
+    color: var(--black-light);
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+
+/* 모바일 (768px 이하)-화면 하단 고정 */
+@media (max-width: 768px) {
+  .container {
+    position: fixed;
+    bottom: 30px; 
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    /* 모양,너비 */
+    width: 90%; 
+    max-width: 400px;
+    padding: 10px;
+    gap: 12px; 
+    border-radius: 50px; 
+    
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    .link, .active {
+      padding: 7px;
+      flex: 1;        
+      font-size: var(--font-sm); 
+      border-radius: 50px;
+      min-width: 0;    
+    }
+
+    .active {
+      background-color: var(--white);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .link:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.4);
+    }
+  }
+}

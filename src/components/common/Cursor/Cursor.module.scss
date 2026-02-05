@@ -1,0 +1,18 @@
+.cursor {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-color);
+    opacity: 0.2;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+
+    //   transition: transform 0.1s ease-out; 
+    // 터치 기능이 있는 기기나 포인터가 정밀하지 않은 기기에서는 숨김
+    @media (pointer: coarse) {
+        display: none;
+    }
+}

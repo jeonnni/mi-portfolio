@@ -1,24 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Header from "./components/common/Header/Header";
+import Navbar from "./components/common/Navbar/Navbar";
+import About from "./pages/About/About";
+import Blog from "./pages/Blog/Blog";
+import Projects from "./pages/Projects/Projects";
+import Skills from "./pages/Skills/Skills";
+import "./styles/variables.css";
+import Loading from "./components/common/Loading/Loading";
+import Contact from "./pages/Contact/Contact";
+import Cursor from "./components/common/Cursor/Cursor";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false); // 라이트/다크모드
+  const [isLoading, setIsLoading] = useState(true); // 로딩
+  // 1. 초기 로딩 제어 (마운트 시 1회)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+  // 2. 다크모드 클래스 제어 (상태 변경 시마다)
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router basename="/mi-portfolio">
+      <div className="container">
+        <Cursor />
+        <Header />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <Navbar />
+            <main className="content">
+              <Routes>
+                <Route path="/" element={<About />}></Route>
+                {/* <Route path="/about" element={<About />}></Route> */}
+                <Route path="/skills" element={<Skills />}></Route>
+                <Route path="/projects" element={<Projects />}></Route>
+                <Route path="/blog" element={<Blog />}></Route>
+                <Route path="/contact" element={<Contact />}></Route>
+              </Routes>
+            </main>
+          </>
+        )}
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="theme-toggle-btn"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {darkMode ? "🌙 " : "☀️"}
+        </button>
+      </div>
+    </Router>
   );
 }
 
