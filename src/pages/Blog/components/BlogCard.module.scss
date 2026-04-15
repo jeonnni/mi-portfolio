@@ -1,89 +1,93 @@
-$transition: opacity 0.3s ease;
-
 .card {
-    position: relative;
-    background-color: var(--black-muted); 
+  position: relative;
+  color: var(--white);
+  border-radius: var(--border-radius);
+  text-align: left;
+  padding: 30px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 호버 시 콘텐츠 페이드아웃 */
+  &:hover .cardContent,
+  &:hover .more,
+  &:hover .overlay {
+    opacity: 0;
+  }
+
+  /* 호버 시 배경 줌 */
+  &:hover .bg {
+    transform: scale(1.08);
+  }
+}
+
+/* 배경 이미지 레이어 */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 어두운 오버레이 */
+.overlay {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  transition: opacity 0.35s ease;
+}
+
+/* 텍스트 콘텐츠 */
+.cardContent {
+  z-index: 2;
+  position: relative;
+  transition: opacity 0.3s ease;
+
+  h3 {
+    font-size: var(--font-lg);
+    margin-bottom: 20px;
+    line-height: var(--line-height);
+    word-break: keep-all;
+  }
+  p {
     color: var(--white);
-    border-radius: var(--border-radius);
-    text-align: left;
-    padding: 30px;
-    height: 300px;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    transition: transform 0.3s;
-    cursor: pointer;
-    
-    /* 배경 이미지 기본 설정 */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    font-size: var(--font-sm);
+  }
+}
 
-    &:hover {
-        transform: translateY(-5px);
-    }
-
-    // 글자,필터 전부 사라지게
-    &:hover {
-        .cardContent, .more, .overlay {
-            opacity: 0;
-        }
-    }
-
-    /* 기본 상태 - 어두운 오버레이 */
-    .overlay {
-        z-index: 1;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7); 
-        transition: $transition;
-    }
-    
-    .cardContent {
-        /* 제목 */
-        h3 {
-            font-size: var(--font-lg);
-            margin-bottom: 20px;
-            line-height: var(--line-height);
-            word-break: keep-all;
-        }
-        
-        /* 날짜 */
-        p {
-            color: var(--white);
-            font-size: var(--font-sm);
-        }
-    }
-    
-    /* 자세히 보기 */
-    .more {
-        font-size: var(--font-base);
-        color: var(--white-soft);
-    }
-    
-    /* 글자 내용 공통 설정 */
-    .cardContent, .more {
-        z-index: 2;
-        position: relative;
-        transition: $transition; 
-    }
+.more {
+  z-index: 2;
+  position: relative;
+  font-size: var(--font-base);
+  color: var(--white-soft);
+  transition: opacity 0.3s ease;
 }
 
 /* 모바일 (768px 이하) */
 @media (max-width: 768px) {
-    .card{
-        .cardContent {
-            h3{font-size: var(--font-base);}
-            p{font-size: var(--font-sm);}
-        }
-        .more {
-            font-size: var(--font-sm);
-        }
-        
+  .card {
+    &:hover {
+      transform: none;
+      box-shadow: none;
     }
+    .cardContent {
+      h3 { font-size: var(--font-base); }
+      p  { font-size: var(--font-sm); }
+    }
+    .more { font-size: var(--font-sm); }
+  }
 }

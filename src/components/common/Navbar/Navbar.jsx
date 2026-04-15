@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 
-const Navbar = () => {
+const Navbar = ({ darkMode, onToggleDark }) => {
   const location = useLocation(); // 현재 브라우저의 주소 정보를 가져옴
   const menuItems = [
     { name: "About", path: "/" },
@@ -22,6 +22,14 @@ const Navbar = () => {
           </Link>
         </div>
       ))}
+      {/* 모바일 전용 다크모드 토글 */}
+      <button
+        className={styles.mobileThemeToggle}
+        onClick={onToggleDark}
+        aria-label="테마 변경"
+      >
+        {darkMode ? "🌙" : "☀️"}
+      </button>
     </nav>
   );
 };

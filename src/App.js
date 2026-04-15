@@ -11,10 +11,17 @@ import "./styles/variables.css";
 import Loading from "./components/common/Loading/Loading";
 import Contact from "./pages/Contact/Contact";
 import Cursor from "./components/common/Cursor/Cursor";
+import ScrollToTop from "./components/common/ScrollToTop/ScrollToTop";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false); // 라이트/다크모드
   const [isLoading, setIsLoading] = useState(true); // 로딩
+
+  // 0. 마운트 즉시 최상단 강제 이동 (새로고침 시 스크롤 위치 튀는 현상 방지)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // 1. 초기 로딩 제어 (마운트 시 1회)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,13 +38,14 @@ function App() {
   return (
     <Router basename="/">
       <div className="container">
+        <ScrollToTop />
         <Cursor />
         <Header />
         {isLoading ? (
           <Loading />
         ) : (
           <>
-            <Navbar />
+            <Navbar darkMode={darkMode} onToggleDark={() => setDarkMode(!darkMode)} />
             <main className="content">
               <Routes>
                 <Route path="/" element={<About />}></Route>

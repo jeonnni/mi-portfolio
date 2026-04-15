@@ -1,3 +1,11 @@
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroLineSlide {
+  from { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  to   { opacity: 1; transform: scaleX(1); transform-origin: left; }
+}
 
 @mixin flex-column($gap: 0) {
   display: flex;
@@ -5,165 +13,150 @@
   gap: $gap;
 }
 
-.container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    cursor:default;
-    // 슬라이드
-    .mySwiper {
-      .slide {
-          padding-bottom: 50px;
-          .content {
-            padding: 5% 0;
-            @include flex-column(15px);
-            text-transform: uppercase;
-              
-              .name {
-                  font-size: var(--font-xxxl); 
-                  font-weight: 900;
-                  color: var(--color-text-main);
-                  margin: 0;
-                  letter-spacing: -1px; 
-              }
-              
-              .line {
-                width: 190px;
-                height: 15px;
-                color: var(--color-text-main);
-              }
-              
-              // 첫 번째 섹션
-              .job {
-                font-size: var(--font-xl);
-                color: var(--color-text-main);
-                margin: 10px 0 25px 0;
-
-                .wordBox {
-                  display: inline-block; 
-                  vertical-align: middle; 
-                  height: 56px;          
-                  overflow: hidden;     
-                }
-                
-                .word {
-                  display: block;        
-                  height: 56px;          
-                  line-height: 56px;     
-                  font-weight: 800;
-                  color: var(--color-text-sub);
-                  margin: 0;             
-                  animation: slideWords 9s infinite ease-in-out;
-                }
-                
-                @keyframes slideWords {
-                  0%, 25% { transform: translateY(0); }
-                  33%, 58% { transform: translateY(-56px); }  
-                  66%, 91% { transform: translateY(-112px); } /* 56 * 2 */
-                  100% { transform: translateY(0); }
-                }
-              }
-              
-              // 첫 번째 섹션 버튼
-              .goBtn {
-                width: fit-content;
-                padding: 15px 40px;
-                background-color: var(--color-text-sub);
-                color: var(--color-text);
-                border: none;
-                font-size: var(--font-lg);
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border-radius: var(--border-radius);
-                &:hover {
-                  opacity:0.9;
-                  color: var(--white-soft);
-                  transform: translateY(-5px);
-                }
-              }
-
-              // 두 번째 섹션
-              .doubleCard {
-                width: 100%;
-                display: flex;
-                gap: 80px; 
-                margin-top: 10px;
-
-                .infoGroup {
-                  flex: 1;
-                  @include flex-column(20px);
-
-                  // 부제목
-                  .skillTitle {
-                    // flex: 1;
-                    font-size: var(--font-xl);
-                    color: var(--color-text-main);
-                    font-weight: 800;
-                    margin: 0;
-                  }
-                  
-                  // 설명
-                  .description {
-                    font-size: var(--font-md);
-                    color: var(--color-text-inner);
-                    line-height: var(--line-height);
-                    text-transform: none; 
-                    margin: 0;
-                  }
-                  
-                  // 태그
-                  .tags {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 8px;
-
-                    span {
-                      font-size: var(--font-sm);
-                      padding: 7px 13px;
-                      background: var(--primary-color);
-                      color: var(--white-mute);
-                      border-radius: var(--border-radius);
-                      font-weight: 500;
-                    }
-                  }
-                }
-              }
-          }
-      }
-    }
+/* ── Slide 2 animated-in state ── */
+.animateIn {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
-/* 태블릿 (1024px 이하) */
-@media (max-width: 1024px) {
-  .container {
-    padding: 0 20px 20px 20px;
-    .mySwiper{
-      .slide{
-        .content{
-          .name{
-            font-size: var(--font-xxl); 
+.container {
+  flex: 1;
+  min-height: 0; /* flex 자식이 컨텐츠 크기로 부모를 밀어내는 현상 방지 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: default;
+
+  .mySwiper {
+    width: 100%;
+    height: 100%; /* 부모 높이를 꽉 채워 페이지 overflow 방지 */
+    .slide {
+      padding-bottom: 50px;
+
+      .content {
+        padding: 5% 0;
+        @include flex-column(15px);
+        text-transform: uppercase;
+
+        /* ── Slide 1: hero animations (CSS, fire on mount) ── */
+        .name {
+          font-size: var(--font-xxxl);
+          font-weight: 900;
+          color: var(--color-text-main);
+          margin: 0;
+          letter-spacing: -1px;
+          animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .line {
+          width: 190px;
+          height: 15px;
+          background: var(--primary-color);
+          border-radius: 4px;
+          animation: heroLineSlide 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        .job {
+          font-size: var(--font-xl);
+          color: var(--color-text-main);
+          margin: 10px 0 25px 0;
+          animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+
+          .wordBox {
+            display: inline-block;
+            vertical-align: middle;
+            height: 56px;
+            overflow: hidden;
           }
-          .job{
-            font-size: var(--font-lg);
+
+          .word {
+            display: block;
+            height: 56px;
+            line-height: 56px;
+            font-weight: 800;
+            color: var(--color-text-sub);
+            margin: 0;
+            animation: slideWords 9s infinite ease-in-out;
           }
-          .goBtn{
-            font-size: var(--font-md);
+
+          @keyframes slideWords {
+            0%, 25%  { transform: translateY(0); }
+            33%, 58% { transform: translateY(-56px); }
+            66%, 91% { transform: translateY(-112px); }
+            100%     { transform: translateY(0); }
           }
-          .doubleCard{
-            .infoGroup{
-              .skillTitle {
-                font-size: var(--font-lg);
-                flex: none;
-              }
-              .description {
-                font-size: var(--font-base);
-              }
-              .tags {
-                span {
-                  font-size: var(--font-xs);
+        }
+
+        .goBtn {
+          width: fit-content;
+          padding: 15px 40px;
+          background-color: var(--color-text-sub);
+          color: var(--color-text);
+          border: none;
+          font-size: var(--font-lg);
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border-radius: var(--border-radius);
+          animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+          &:hover {
+            opacity: 0.9;
+            color: var(--white-soft);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 24px rgba(63, 136, 197, 0.35);
+          }
+          &:active {
+            transform: translateY(-2px);
+          }
+        }
+
+        /* ── Slide 2: capability cards ── */
+        .doubleCard {
+          width: 100%;
+          display: flex;
+          gap: 80px;
+          margin-top: 10px;
+
+          .infoGroup {
+            flex: 1;
+            @include flex-column(20px);
+            /* initial hidden state for slide 2 */
+            opacity: 0;
+            transform: translateY(24px);
+            transition:
+              opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+
+            .skillTitle {
+              font-size: var(--font-xl);
+              color: var(--color-text-main);
+              font-weight: 800;
+              margin: 0;
+            }
+
+            .description {
+              font-size: var(--font-md);
+              color: var(--color-text-inner);
+              line-height: var(--line-height);
+              text-transform: none;
+              margin: 0;
+            }
+
+            .tags {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              span {
+                font-size: var(--font-sm);
+                padding: 7px 13px;
+                background: var(--primary-color);
+                color: var(--white-mute);
+                border-radius: var(--border-radius);
+                font-weight: 500;
+                transition: transform 0.2s ease;
+                &:hover {
+                  transform: translateY(-2px);
                 }
               }
             }
@@ -173,6 +166,41 @@
     }
   }
 }
+
+/* ── slide 2 title/line: also need initial hidden ── */
+.slide:nth-child(2) .name,
+.slide:nth-child(2) .line {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+  animation: none; /* override slide 1 keyframes */
+}
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px 20px 20px;
+    .mySwiper {
+      .slide {
+        .content {
+          .name { font-size: var(--font-xxl); }
+          .job  { font-size: var(--font-lg); }
+          .goBtn { font-size: var(--font-md); }
+          .doubleCard {
+            .infoGroup {
+              .skillTitle  { font-size: var(--font-lg); flex: none; }
+              .description { font-size: var(--font-base); }
+              .tags span   { font-size: var(--font-xs); }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /* 모바일 (768px 이하) */
 @media (max-width: 768px) {
   .container {
@@ -180,28 +208,26 @@
       .slide {
         .content {
           .name {
-            font-size: var(--font-sub-xl); 
+            font-size: var(--font-sub-xl);
           }
           .line {
-            width: 100px; 
+            width: 100px;
             height: 10px;
           }
           .job {
             font-size: var(--font-base);
             margin: 5px 0 15px 0;
-            
-            .wordBox { height: 30px;} 
-            .word { 
+            .wordBox { height: 30px; }
+            .word {
               height: 30px;
               line-height: 30px;
               animation: slideWordsMobile 9s infinite ease-in-out;
             }
-            /* 모바일 전용 (높이 30px) */
             @keyframes slideWordsMobile {
-              0%, 25% { transform: translateY(0); }
-              33%, 58% { transform: translateY(-30px); }  
-              66%, 91% { transform: translateY(-60px); } /* 30 * 2 */
-              100% { transform: translateY(0); }
+              0%, 25%  { transform: translateY(0); }
+              33%, 58% { transform: translateY(-30px); }
+              66%, 91% { transform: translateY(-60px); }
+              100%     { transform: translateY(0); }
             }
           }
           .goBtn {
@@ -211,30 +237,16 @@
             font-size: var(--font-base);
           }
           .doubleCard {
-            flex-direction: column; 
-            gap: 40px; 
+            flex-direction: column;
+            gap: 40px;
             margin-top: 20px;
-  
             .infoGroup {
-              gap: 12px; 
-  
-              .skillTitle {
-                font-size: var(--font-base);
-                flex: none; 
-              }
-  
-              .description {
-                font-size: var(--font-sm);
-                line-height: 1.5;
-                word-break: keep-all; 
-              }
-  
+              gap: 12px;
+              .skillTitle  { font-size: var(--font-base); flex: none; }
+              .description { font-size: var(--font-sm); line-height: 1.5; word-break: keep-all; }
               .tags {
                 gap: 6px;
-                span {
-                  font-size: var(--font-xs); 
-                  padding: 5px 10px;
-                }
+                span { font-size: var(--font-xs); padding: 5px 10px; }
               }
             }
           }

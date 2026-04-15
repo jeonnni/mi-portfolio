@@ -1,0 +1,9 @@
+/* SweetAlert2 프로젝트 모달 다크모드 */
+body.dark-mode .dark-modal.swal2-popup {
+  background-color: var(--border-dark) !important;
+  color: var(--white-soft) !important;
+}
+
+body.dark-mode .dark-modal .swal2-close {
+  color: var(--white-soft) !important;
+}

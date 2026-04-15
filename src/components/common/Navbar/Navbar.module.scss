@@ -84,3 +84,23 @@
     }
   }
 }
+
+/* 모바일 전용 다크모드 토글 버튼 */
+.mobileThemeToggle {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobileThemeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: var(--font-md);
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 50px;
+    flex-shrink: 0;
+  }
+}

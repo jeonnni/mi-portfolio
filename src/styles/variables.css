@@ -99,10 +99,12 @@ html, body {
 }
 
 html {
-  /* 스크롤바가 생길 때, 화면 내용이 갑자기 왼쪽으로 밀리는 현상 방지 */
-  /* scrollbar-gutter: stable; */
-  overflow-y: overlay;
+  overflow-y: hidden; /* PC 기본: 스크롤 불필요 페이지에서 깜박임 방지 */
   background-color: var(--color-bg-primary);
+}
+/* 모바일/태블릿은 콘텐츠가 길 수 있으므로 스크롤 허용 */
+@media (max-width: 1024px) {
+  html { overflow-y: auto; }
 }
 ::-webkit-scrollbar-track {
   background: var(--color-bg-primary); 
@@ -113,7 +115,7 @@ html {
   max-width: var(--max-content-width);
   /* width: 100%;  */
   width: 100vw;
-  overflow-x: hidden; 
+  overflow-x: clip; /* hidden 대신 clip: 스크롤 컨테이너를 생성하지 않음 */
   min-height: 100vh;
 
   display: flex;
@@ -122,10 +124,12 @@ html {
   margin: 0 auto;
 }
 
-.content {    
-  flex: 1;           
+.content {
+  flex: 1;
+  min-height: 0; /* flex 자식이 컨텐츠 크기로 부모를 밀어내는 현상 방지 */
+  overflow: clip; /* 애니메이션 translateY 시작 위치가 뷰포트 밖으로 나가 스크롤바 생기는 현상 방지 */
   width: 100%;
-  display: flex;     
+  display: flex;
   flex-direction: column;
   cursor: none;
 }

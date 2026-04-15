@@ -1,46 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Projects.module.scss";
 import OpenModal from "../../components/common/OpenModal/OpenModal";
 import { projectsData } from "../../data/projectsData";
+import { useInView } from "../../hooks/useInView";
 
 const Projects = () => {
-  const [itemsToShow, setItemsToShow] = useState(3); // 초기에 보여줄 프로젝트 수
-  const handleShowMore = () => {
-    setItemsToShow((prev) => prev + 3); 
-  };
-  const onOpenModal = (project)=> {
-    // console.log(project);
-    OpenModal(project);
-  }
+  const [itemsToShow, setItemsToShow] = useState(3);
+  const { ref: gridRef, inView: gridVisible } = useInView(0.05);
+
+  // Projects는 카드가 많아 스크롤이 필요 → 이 페이지에서만 허용
+  useEffect(() => {
+    document.documentElement.style.overflowY = 'auto';
+    const main = document.querySelector('main.content');
+    if (main) main.style.overflow = 'visible';
+    return () => {
+      document.documentElement.style.overflowY = '';
+      if (main) main.style.overflow = '';
+    };
+  }, []);
+
+  const handleShowMore = () => setItemsToShow((prev) => prev + 3);
 
   return (
-    <div className={styles.container}>
-      <div className={`text-kr ${styles.grid}`}>
-        {projectsData.slice(0, itemsToShow).map((project) => (
+    <div className={`page-enter ${styles.container}`}>
+      <div
+        ref={gridRef}
+        className={`text-kr ${styles.grid}`}
+      >
+        {projectsData.slice(0, itemsToShow).map((project, index) => (
           <div
-            className={styles.card}
+            className={`${styles.card} anim ${gridVisible ? 'visible' : ''}`}
             key={project.id}
-            onClick={() => onOpenModal(project)}
+            style={{ '--delay': `${index * 0.08}s` }}
+            onClick={() => OpenModal(project)}
           >
             <div className={styles.icon}>{project.icon}</div>
             <h3>{project.title}</h3>
-            <p>
-              {project.desc.length > 10
-                ? `${project.desc.slice(0, 50)}...`
-                : project.desc}
-            </p>
+            <p className={styles.desc}>{project.desc}</p>
             <div className={styles.tags}>
               {project.tags.map((tag) => (
-                <span className="text-en" key={tag}>
-                  {tag}
-                </span>
+                <span className="text-en" key={tag}>{tag}</span>
               ))}
             </div>
           </div>
         ))}
       </div>
 
-      {/* 모든 데이터를 다 보여주면 버튼 숨김 */}
       {itemsToShow < projectsData.length && (
         <button
           className={`text-kr ${styles.moreBtn}`}

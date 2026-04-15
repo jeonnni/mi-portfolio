@@ -3,12 +3,12 @@
 export const LINK_DATA = [
   {
     id: "gh-1",
-    label: "github",
+    label: "github (현재)",
     url: "https://github.com/jeonnni",
   },
   {
     id: "gh-2",
-    label: "github",
+    label: "github (아카이브)",
     url: "https://github.com/ol7mi",
   },
   {

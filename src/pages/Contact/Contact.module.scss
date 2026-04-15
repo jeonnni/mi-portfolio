@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow-x: clip;
     .box {
         width: 100%;
         max-width: 1100px;
@@ -33,7 +33,19 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
-            
+
+                .fieldWrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                }
+
+                .errorMsg {
+                    font-size: var(--font-xs);
+                    color: #e53e3e;
+                    padding-left: 4px;
+                }
+
                 input, textarea {
                     width: 100%;
                     padding: 16px 20px;
